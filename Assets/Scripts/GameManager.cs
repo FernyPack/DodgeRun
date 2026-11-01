@@ -25,14 +25,12 @@ public class GameManager : MonoBehaviour
     {
         if (IsGameOver) return;
 
-        survivalTime += 1f / 60f;     // one frame = 1/60 of a second
+        survivalTime += Time.deltaTime;   // real seconds, whatever the frame rate
 
-        if (player.health <= 0)
-        {
-            RestartGame();
-        }
+        // No health check here anymore - PlayerController.Health calls RestartGame() itself.
     }
 
+    // Called by PlayerController.Health when it reaches 0.
     public void RestartGame()
     {
         if (IsGameOver) return;
@@ -55,7 +53,7 @@ public class GameManager : MonoBehaviour
             bigStyle = new GUIStyle(hudStyle) { fontSize = 48, alignment = TextAnchor.MiddleCenter };
         }
 
-        GUI.Label(new Rect(20, 15, 500, 40), "Health: " + player.health + " / " + player.maxHealth, hudStyle);
+        GUI.Label(new Rect(20, 15, 500, 40), "Health: " + player.Health + " / " + player.MaxHealth, hudStyle);
         GUI.Label(new Rect(20, 50, 500, 40), "Time: " + survivalTime.ToString("0.0") + "s", hudStyle);
 
         if (IsGameOver)

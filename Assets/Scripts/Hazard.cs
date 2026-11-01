@@ -10,7 +10,7 @@ public class Hazard : MonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null) return;
 
-        player.health -= damage;
+        player.Health -= damage;      // property clamps at 0 and restarts the game if needed
         Destroy(gameObject);
     }
 }

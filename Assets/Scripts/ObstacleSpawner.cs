@@ -5,20 +5,21 @@ public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject obstaclePrefab;
     public GameObject pickupPrefab;
-    public int framesBetweenSpawns = 45;
+    public float secondsBetweenSpawns = 0.75f;
     [Range(0f, 1f)] public float pickupChance = 0.15f;
     public float spawnWidth = 9f;
 
-    int frameCounter;
+    float spawnTimer;
 
     void Update()
     {
         if (GameManager.Instance != null && GameManager.Instance.IsGameOver) return;
 
-        frameCounter++;
-        if (frameCounter >= framesBetweenSpawns)
+        // count real time, not frames
+        spawnTimer += Time.deltaTime;
+        if (spawnTimer >= secondsBetweenSpawns)
         {
-            frameCounter = 0;
+            spawnTimer -= secondsBetweenSpawns;
             Spawn();
         }
     }

@@ -10,7 +10,7 @@ public class HealthPickup : MonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if (player == null) return;
 
-        player.health += healAmount;
+        player.Health += healAmount;  // property clamps at MaxHealth
         Destroy(gameObject);
     }
 }
