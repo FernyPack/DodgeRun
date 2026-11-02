@@ -1,6 +1,6 @@
 using UnityEngine;
 
-// Spawns obstacles (and the occasional health pickup) at the far end of the track.
+// Spawns obstacles and the occasional health pickup
 public class ObstacleSpawner : MonoBehaviour
 {
     public GameObject obstaclePrefab;

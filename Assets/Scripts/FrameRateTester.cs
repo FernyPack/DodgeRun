@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 // Testing tool: lock the game to different frame rates to see how movement behaves.
 // 1 = 30 FPS, 2 = 60 FPS, 3 = 144 FPS, 0 = unlimited.
@@ -17,10 +18,14 @@ public class FrameRateTester : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1)) SetTarget(30);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) SetTarget(60);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) SetTarget(144);
-        if (Input.GetKeyDown(KeyCode.Alpha0)) SetTarget(-1);
+        Keyboard kb = Keyboard.current;
+        if (kb != null)
+        {
+            if (kb.digit1Key.wasPressedThisFrame) SetTarget(30);
+            if (kb.digit2Key.wasPressedThisFrame) SetTarget(60);
+            if (kb.digit3Key.wasPressedThisFrame) SetTarget(144);
+            if (kb.digit0Key.wasPressedThisFrame) SetTarget(-1);
+        }
 
         // average the real FPS over half a second
         frames++;
